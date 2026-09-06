@@ -14,6 +14,12 @@ proc get_script_folder {} {
 }
 }
 
+set vivado_base ../../scripts/vivado_base.tcl
+if { [file exists $vivado_base] == 1} {
+    set path ../..
+    source ../../scripts/vivado_base.tcl
+}
+
 set vivado_base ../../../scripts/vivado_base.tcl
 if { [file exists $vivado_base] == 1} {
     set path ../../..
