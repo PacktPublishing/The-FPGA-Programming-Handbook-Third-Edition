@@ -1,0 +1,49 @@
+# CH14 build outputs.
+#
+# Scoped to this chapter rather than added to the repository root, so CH14 is
+# self-sufficient and nothing here changes what any other chapter sees.
+#
+# Nothing generated is tracked, which matches the rest of the repository --
+# `git ls-files` finds no .bit, .hwh or .xsa anywhere in it. Both builds are
+# reproducible from what IS tracked:
+#
+#   vivado -mode batch -source project_sysmon_lcd/build.tcl   # .bit .hwh .xsa
+#   vitis  -s sw_mb/build_app.py                              # .elf
+
+# The Vivado project the new design is built in, and the artifacts it exports.
+/project_sysmon_lcd/vivado/
+/project_sysmon_lcd/out/
+
+# The Vitis workspace (platform, BSP, application) and the ELF it produces.
+/sw_mb/workspace/
+/sw_mb/out/
+
+# The host-native unit test binaries.
+/sw_mb/build/
+
+# The Vivado project of the design CH14 originally shipped. build/bd/hw.tcl is
+# its SOURCE and is tracked -- project_sysmon_lcd/build.tcl sources that file
+# to get the block design and the PS configuration, so without it the new
+# design cannot be rebuilt. Everything else under build/ is output.
+/build/*
+!/build/bd/
+!/build/xdc/
+
+# Tool droppings, at every level.
+*.jou
+*.log
+*.str
+.Xil/
+hs_err_pid*.log
+__pycache__/
+
+# Vivado project trees left by the other language directories.
+*.cache/
+*.gen/
+*.hw/
+*.ip_user_files/
+*.runs/
+*.sim/
+*.srcs/
+*.xpr
+*.xsa
