@@ -30,27 +30,27 @@ int main () {
       check = 0;
       if (pb == 0) {
         check = sw.range(7,4) - sw.range(3,0);
+      } else if (pb == 1) {
+        check = sw.range(7,4) + sw.range(3,0);
+      } else if (pb == 2) {
+        for (int i = 0; i < 8; i++) {
+          check += sw.range(i,i);
+        }
+      } else if (pb == 4) {
+        for (int i = 0; i < 8; i++) {
+          if (sw.range(i,i)) check = i+1;
+        }
       } else if (pb == 8) {
         for (int i = 0; i < 8; i++) {
           check = sw.range(7,4) * sw.range(3,0);
         }
-      } else if (pb == 4) {
-        for (int i = 0; i < 8; i++) {
-          check += sw.range(i,i);
-        }
-      } else if (pb == 2) {
-        for (int i = 0; i < 8; i++) {
-          if (sw.range(i,i)) check = i+1;
-        }
-      } else if (pb == 1) {
-        check = sw.range(7,4) + sw.range(3,0);
       }
-    }
-    if (check != led) {
-      ret = 1;
-      printf("Test failed  !!!\n");
-      std::cout << "PB = " << pb << ", SW = " << sw << ", LED = " << led << ", EXP = " << check << std::endl;
-      return ret;
+      if (check != led) {
+        ret = 1;
+        printf("Test failed  !!!\n");
+        std::cout << "PB = " << pb << ", SW = " << sw << ", LED = " << led << ", EXP = " << check << std::endl;
+        return ret;
+      }
     }
   }
   printf("Test passed !\n");
